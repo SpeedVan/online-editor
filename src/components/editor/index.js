@@ -11,7 +11,7 @@ const onHandleUpdateDefault = (view, t) => {
 };
 
 
-const Editor = memo(function Codemirror({
+const Editor = function Codemirror({
 	value = '',
 	extensions = [],
 	onTextChange = null,
@@ -39,10 +39,49 @@ const Editor = memo(function Codemirror({
 			language:"python",
 			theme: "vs-dark"
 		}))
-		meditor.opt
 		
+		meditor.onKeyDown((e) => {
+			if (e.metaKey && e.code == "Enter"){
+				const position = meditor.getPosition()
+				meditor.changeViewZones(function(changeAccessor) {
+					var domNode = document.createElement('div');
+					domNode.style.background = 'grey';
+					changeAccessor.addZone({
+								afterLineNumber: position.lineNumber,
+								heightInLines: 3,
+								domNode: domNode
+					});
+				});
+			}
+		})
 
-		return () => meditor.dispose();
+
+		// const contentWidget = {
+		// 	domNode: null,
+		// 	getId: function() {
+		// 		return 'my.content.widget';
+		// 	},
+		// 	getDomNode: function() {
+		// 		if (!this.domNode) {
+		// 			this.domNode = document.createElement('div');
+		// 			this.domNode.innerHTML = 'My content widget';
+		// 			this.domNode.style.background = 'grey';
+		// 		}
+		// 		return this.domNode;
+		// 	},
+		// 	getPosition: function() {
+		// 		return {
+		// 			position: {
+		// 				lineNumber: 7,
+		// 				column: 8
+		// 			},
+		// 			preference: [monaco.editor.ContentWidgetPositionPreference.ABOVE, monaco.editor.ContentWidgetPositionPreference.BELOW]
+		// 		};
+		// 	}
+		// };
+		// meditor.addContentWidget(contentWidget);
+
+		// return () => meditor.dispose();
     }, []);
     
     // useEffect(() => {
@@ -53,6 +92,6 @@ const Editor = memo(function Codemirror({
 
 
 	return <div ref={container} class={style.editor} {...rest} />;
-})
+}
 
-export default Editor
+export default memo(Editor)

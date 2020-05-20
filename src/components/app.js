@@ -6,7 +6,8 @@ import Header from './header';
 // Code-splitting is automated for routes
 import Home from '../routes/home';
 import Profile from '../routes/profile';
-import EditPage from '../routes/edit'
+import LocalEditPage from '../routes/local-edit'
+import RemoteEditPage from '../routes/remote-edit'
 
 export default class App extends Component {
 	
@@ -24,7 +25,8 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
-					<EditPage path="/function/editor" />
+					<LocalEditPage path="/function/local-edit" />
+					<RemoteEditPage path="/function/remote-edit" />
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
 				</Router>
