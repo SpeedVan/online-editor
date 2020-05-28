@@ -4,6 +4,20 @@ import { useRef, useEffect } from 'preact/hooks';
 import { memo } from 'preact/compat';
 import style from './style'
 import pysg from './python/suggestions'
+import uuid from 'uuid'
+import { Msg, Type, Meta } from './proto'
+import AnsiUp from 'ansi_up';
+
+const ansi_up = new AnsiUp()
+
+const _utf2buffer = utfstr => {
+    var buf = new ArrayBuffer(utfstr.length);
+    var bufView = new Uint8Array(buf);
+    for (var i = 0, strlen = utfstr.length; i < strlen; i++) {
+        bufView[i] = utfstr.charCodeAt(i);
+    }
+    return buf;
+}
 
 const Editor = function Codemirror({
 	value = '',
@@ -26,16 +40,39 @@ const Editor = function Codemirror({
 			}
 		})
 
-        let meditor = (editor.current = MonacoEditor.create(container.current, {
+        const meditor = (editor.current = MonacoEditor.create(container.current, {
 			value: value,
 			language:"python",
 			theme: "vs-dark"
 		}))
 
+		const tasks = {}
+
+		const ws = new WebSocket("ws://python-lang-server.faas-edit.test/interactive");
+		ws.binaryType = "arraybuffer"
+		ws.onopen = function(e) { 
+			console.log("Connection open ...");
+		};
+
+		ws.onmessage = function(e) {
+			const msg = Msg.deserializeBinary(e.data)
+			const traceId = msg.getMeta().getTraceid()
+			const f = tasks[traceId]
+			f(msg.getBody_asUTF8())
+			delete tasks[traceId]
+			// ws.close();
+		};
+
+		ws.onclose = function(e) {
+			console.log("Connection closed.", e);
+		};   
+
 		meditor.onKeyDown((e) => {
 			if (e.metaKey && e.code == "KeyI") {
 				console.log(meditor)
 				console.log(meditor._modelData.viewModel.viewLayout._linesLayout._arr)
+				const viewZones = meditor._modelData.view.viewZones
+				console.log(viewZones.changeViewZones)
 			}
 			if (e.metaKey && e.code == "Backspace") {
 				const currLine = meditor.getPosition().lineNumber
@@ -52,7 +89,7 @@ const Editor = function Codemirror({
 					now_viewZones_layouts.filter(i=>i.afterLineNumber == currLine).map(i=>i.id).forEach(i=>changeAccessor.removeZone(i))
 				})
 				meditor.changeViewZones(function(changeAccessor) {
-					const domNode = document.createElement('div');
+					
 					const position = meditor.getPosition();
 					const text = meditor.getValue(position);
 					const splitedText = text.split("\n");
@@ -64,27 +101,47 @@ const Editor = function Codemirror({
 						}
 					}
 					sendCode = splitedText.slice(max_smaller-1, currLine).join('\n')
-					fetch('http://127.0.0.1:8888/',{
-						method:'POST',
-						mode:'cors',
-						body: sendCode
-					}).then(res =>res.text())
-					.then(text => {
-						domNode.innerHTML = text
-					}) 
+					const traceId = uuid.v4()
+					const msg = Msg.simpleCreate(Type.INTERACTIVE_REQ, traceId, sendCode)
 					
+					const domNode = document.createElement('div');
 					domNode.style.background = 'grey';
-					changeAccessor.addZone({
+					domNode.innerHTML = "Waiting..."
+					const zoneId = changeAccessor.addZone({
 						afterLineNumber: currLine,
-						heightInLines: 3,
+						heightInLines: 1,
 						domNode: domNode
 					});
+
+					tasks[traceId] = data => meditor.changeViewZones(function(changeAccessor) {
+						changeAccessor.removeZone(zoneId)
+						const domNode = document.createElement('div');
+						domNode.style.background = 'grey';
+						const splitedText = data.split("\n");
+						const text = ansi_up.ansi_to_html(data)
+
+						domNode.innerHTML = text.replace(/\n/g, "<br />")
+
+						changeAccessor.addZone({
+							afterLineNumber: currLine,
+							heightInLines: splitedText.length,
+							domNode: domNode,
+							suppressMouseDown: true
+						})
+					})
+
+					ws.send(msg.serializeBinary().buffer)
+					
 				});
 				
 			}
 		})
 
-		return () => meditor.dispose();
+		return () => {
+			console.log("exist")
+			ws.close();
+			meditor.dispose();
+		}
     }, []);
 
 
@@ -92,3 +149,5 @@ const Editor = function Codemirror({
 }
 
 export default memo(Editor)
+
+

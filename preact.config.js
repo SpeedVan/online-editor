@@ -1,5 +1,6 @@
 // ... imports or other code up here ...
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // these props are both optional
 export default {
@@ -15,9 +16,17 @@ export default {
 	 * @param {object} options - this is mainly relevant for plugins (will always be empty in the config), default to an empty object
 	 **/
 	webpack(config, env, helpers, options) {
-		config.plugins.push(new MonacoWebpackPlugin({
-			languages: ["python", "javascript", "typescript", "html", "css"]
-		}))
+		config.output.publicPath = './';
+		config.plugins.push(
+			new MonacoWebpackPlugin({
+				// languages: ["python", "javascript", "typescript", "html", "css"]
+				languages: ["python"]
+			}),
+			new BundleAnalyzerPlugin(),
+			new helpers.webpack.DefinePlugin({
+				"process.env.PUBLIC_PATH": JSON.stringify(config.output.publicPath || "/")
+			})
+		)
 		/** you can change the config here **/
 	},
 };
