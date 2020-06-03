@@ -7,6 +7,7 @@ import pysg from './python/suggestions'
 import uuid from 'uuid'
 import { Msg, Type, Meta } from './proto'
 import AnsiUp from 'ansi_up';
+import useScript from './util/useScript'
 
 const ansi_up = new AnsiUp()
 
@@ -29,13 +30,13 @@ const Editor = function Codemirror({
 }) {
     const container = useRef(null);
 	const editor = useRef(null);
-    const dispatchRefs = useRef({});
+	const dispatchRefs = useRef({});
 
     useEffect(() => {
 		MonacoEditorLangs.registerCompletionItemProvider('python', {
 			provideCompletionItems: function(model, position) {
 				return {
-					suggestions:pysg
+					// suggestions:pysg
 				};
 			}
 		})

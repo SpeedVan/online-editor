@@ -5,7 +5,7 @@
   "homepage": ".",
   "license": "MIT",
   "scripts": {
-    "build": "preact build --no-prerender",
+    "build": "preact build --no-prerender --max-old-space-size=4096",
     "serve": "sirv build --cors --single",
     "dev": "preact watch",
     "lint": "eslint src",
@@ -18,13 +18,16 @@
     ]
   },
   "devDependencies": {
+    "dynamic-cdn-webpack-plugin": "^5.0.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-preact-pure": "^2.0.0",
     "eslint": "^6.0.1",
     "eslint-config-preact": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-preset-preact": "^1.0.0",
+    "module-to-cdn": "^3.1.5",
     "preact-cli": "^3.0.0-rc.6",
     "preact-render-spy": "^1.2.1",
     "sirv-cli": "^0.4.5",
@@ -32,13 +35,16 @@
   },
   "dependencies": {
     "ansi_up": "^4.0.4",
+    "antd": "^4.3.1",
     "google-protobuf": "^3.12.1",
     "history": "^4.10.1",
     "monaco-editor": "^0.20.0",
     "monaco-editor-webpack-plugin": "^1.9.0",
     "preact": "^10.3.2",
     "preact-render-to-string": "^5.1.4",
-    "preact-router": "^3.2.1"
+    "preact-router": "^3.2.1",
+    "react-sortable-tree": "^2.7.1",
+    "react-sortable-tree-theme-file-explorer": "^2.0.0"
   },
   "jest": {
     "preset": "jest-preset-preact",

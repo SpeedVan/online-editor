@@ -26,7 +26,7 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute} history={createHashHistory()}>
 					<Home path="/" />
-					<LocalEditPage path="/function/local-edit" />
+					<LocalEditPage path="/function/editor" />
 					{/* <RemoteEditPage path="/function/remote-edit" /> */}
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
