@@ -1,8 +1,8 @@
-import { h } from 'preact';
-import style from './style';
+import React from 'react';
+import style from './style.module.css';
 
 const Home = () => (
-	<div class={style.home}>
+	<div className={style.home}>
 		<h1>Home</h1>
 		<p>This is the Home component.</p>
 	</div>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // source: src/components/editor/proto/msg.proto
 /**
  * @fileoverview

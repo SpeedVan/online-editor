@@ -1,3 +1,4 @@
+/* eslint-disable */
 require('./msg_pb.js')
 
 const Msg = proto.Msg

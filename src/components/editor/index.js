@@ -1,24 +1,22 @@
-import { h } from 'preact';
+import React, { memo, useRef, useEffect } from 'react';
 import { editor as MonacoEditor, languages as MonacoEditorLangs } from 'monaco-editor'
-import { useRef, useEffect } from 'preact/hooks';
-import { memo } from 'preact/compat';
-import style from './style'
+import style from './style.module.css'
 import pysg from './python/suggestions'
 import uuid from 'uuid'
 import { Msg, Type, Meta } from './proto'
 import AnsiUp from 'ansi_up';
-import useScript from './util/useScript'
+// import useScript from './util/useScript'
 
 const ansi_up = new AnsiUp()
 
-const _utf2buffer = utfstr => {
-    var buf = new ArrayBuffer(utfstr.length);
-    var bufView = new Uint8Array(buf);
-    for (var i = 0, strlen = utfstr.length; i < strlen; i++) {
-        bufView[i] = utfstr.charCodeAt(i);
-    }
-    return buf;
-}
+// const _utf2buffer = utfstr => {
+//     var buf = new ArrayBuffer(utfstr.length);
+//     var bufView = new Uint8Array(buf);
+//     for (var i = 0, strlen = utfstr.length; i < strlen; i++) {
+//         bufView[i] = utfstr.charCodeAt(i);
+//     }
+//     return buf;
+// }
 
 const Editor = function Codemirror({
 	value = '',
@@ -36,7 +34,7 @@ const Editor = function Codemirror({
 		MonacoEditorLangs.registerCompletionItemProvider('python', {
 			provideCompletionItems: function(model, position) {
 				return {
-					// suggestions:pysg
+					suggestions:pysg
 				};
 			}
 		})
@@ -146,7 +144,7 @@ const Editor = function Codemirror({
     }, []);
 
 
-	return <div ref={container} class={style.editor} {...rest} />;
+	return <div ref={container} className={style.editor} {...rest} />;
 }
 
 export default memo(Editor)
