@@ -5,7 +5,6 @@ import style from './style.css'
 import C from '../../components/tree';
 
 import { Layout } from 'antd';
-import 'antd/dist/antd.css';
 const { Header, Footer, Sider, Content } = Layout;
 
 // const contentChange = () => 123

@@ -8,7 +8,6 @@ import { BrowserRouter, Switch, Route, Link, HashRouter } from 'react-router-dom
 import { createHashHistory } from 'history';
 
 import { Layout } from 'antd';
-import 'antd/dist/antd.css';
 const { Header, Footer, Sider, Content } = Layout;
 
 // function App() {
