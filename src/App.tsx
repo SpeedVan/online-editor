@@ -42,6 +42,8 @@ type Prop = {
   data: Array<Item>
 }
 
+console.log("style", style["ant-layout-header"])
+
 const HeaderPanel: React.FC<Prop> = ({data}) => (
   <Header className={style["ant-layout-header"]}>
     <h1>GIT ONLINER EDITOR</h1>
