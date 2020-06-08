@@ -2,7 +2,8 @@ import React from 'react'
 import Editor from '../../components/editor'
 import style from './style.css'
 
-import C from '../../components/tree';
+import FileSystemTree from '../../components/tree';
+import 'antd/dist/antd'
 
 import { Layout } from 'antd';
 const { Header, Footer, Sider, Content } = Layout;
@@ -11,7 +12,7 @@ const { Header, Footer, Sider, Content } = Layout;
 
 const EditPanel = () => (
     <Layout>
-        <Sider style={{background:"#fff"}}><C data={{}}/></Sider>
+        <Sider style={{background:"#fff"}}><FileSystemTree data={{}}/></Sider>
         <Layout>
             <Header>Header</Header>
             <Content><Editor text={''}/></Content>

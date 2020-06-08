@@ -1,13 +1,12 @@
-/* eslint-disable */
-require('./msg_pb.js')
+import { Msg, Meta, Type } from "./generated/msg_pb"
 
-const Msg = proto.Msg
-const Meta = proto.Meta
-const Type = proto.Type
-const encoder = new TextEncoder("utf-8")
+const encoder = new TextEncoder()
 const decoder = new TextDecoder("utf-8")
 
-Msg.simpleCreate=function(type, traceId, body) {
+/**
+ * hack
+ */
+Msg.simpleCreate = (type, traceId, body) => {
     const msg = new Msg()
     const meta = new Meta()
     meta.setType(type)
@@ -17,7 +16,8 @@ Msg.simpleCreate=function(type, traceId, body) {
     return msg
 }
 
-Msg.prototype.getBody_asUTF8=function(){
+Msg.prototype.getBody_asUTF8 = function () {
     return decoder.decode(this.getBody_asU8())
 }
-export {Msg, Meta, Type}
+
+export { Msg, Meta, Type }
