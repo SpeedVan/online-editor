@@ -7,7 +7,7 @@ const GetViewZoneArr = editor => editor._modelData.view.viewZones._zones
 
 const Must = p => {
     if (p == null) {
-        throw new Error("null Position")
+        throw new Error("must not null")
     }
     return p
 }

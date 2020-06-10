@@ -1,6 +1,6 @@
 import { editor as me } from 'monaco-editor'
-// import { LinesLayout, EditorWhitespace } from '../../../../node_modules/monaco-editor/esm/vs/editor/common/viewLayout/linesLayout.js'
-// import { ViewZones } from '../../../../node_modules/monaco-editor/esm/vs/editor/browser/viewParts/viewZones/viewZones'
+// import { LinesLayout, EditorWhitespace } from 'monaco-editor/esm/vs/editor/common/viewLayout/linesLayout.js'
+// import { ViewZones } from 'monaco-editor/esm/vs/editor/browser/viewParts/viewZones/viewZones'
 
 declare function GetViewLayoutArr(editor: me.IStandaloneCodeEditor):EditorWhitespace[];
 

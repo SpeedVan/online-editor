@@ -8,6 +8,7 @@ import SortableTree, { toggleExpandedForAll, ExtendedNodeData } from 'react-sort
 import FileExplorerTheme from 'react-sortable-tree-theme-file-explorer';
 
 import tmp from './tmp'
+import model from './model'
 // import Search from './search'
 
 // import { ObjectInspector, TableInspector } from 'react-inspector';
@@ -186,11 +187,11 @@ const alertNodeInfo = ({ node, path, treeIndex }: tP) => {
   );
 };
 
-type Prop = {
-  onClick: Function
+export type Prop = {
+  // onClick: Function
 }
 
-const TreeFunc: React.FC<Prop> = ({ onClick }) => {
+const TreeFunc: React.FC<Prop> = () => {
   const initState = { searchString: '', searchFocusIndex: 0, searchFoundCount: null, treeData: tmp.DemoTreeData }
   const { state, settings, refComputed, sync } = useConcent({
     module: "tree",
@@ -250,7 +251,7 @@ const TreeFunc: React.FC<Prop> = ({ onClick }) => {
         i
                         </button>,
     ],
-    onClick: onClick
+    onClick: () => alertNodeInfo(rowInfo)
   })
 
 
@@ -291,6 +292,7 @@ const TreeFunc: React.FC<Prop> = ({ onClick }) => {
 }
 
 export default TreeFunc
+export { model }
 
 /**
  * old version in Component class style
