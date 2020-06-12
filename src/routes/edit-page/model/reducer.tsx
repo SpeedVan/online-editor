@@ -1,4 +1,4 @@
-import * as mr from '../../../components/multi/model/reducer'
+import * as mr from 'src/components/multi/model/reducer'
 import * as er from '../../../components/editor/model/reducer'
 
 import { StateType } from './state'

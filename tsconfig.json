@@ -18,10 +18,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-
     "noImplicitAny": true
   },
   "include": [
     "src"
-  ]
+  ],
+  "extends": "./tsAliasPaths.json"
 }
