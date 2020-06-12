@@ -1,55 +1,37 @@
 import React from 'react'
+// import Editor from '../../components/editor/concent'
 import Editor from '../../components/editor'
-import { Concent as MultiConcent } from '../../components/multi'
+// import Multi from '../../components/multi/concent'
+import Multi, { PropsType as MP } from '../../components/multi'
 import style from './style.module.css'
 
-import FileSystemTree, { model as treeModel, Prop as TreeProp } from '../../components/tree';
+
+// import Tree from '../../components/tree/concent';
+import Tree, { PropsType as TP } from '../../components/tree'
 // import 'antd/dist/antd'
 
 import { Layout } from 'antd';
 
 const { Header, Footer, Sider, Content } = Layout;
 
-// const contentChange = () => 123
+type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
+type ModulePropsType<T> = T extends { 0: infer U } ? U : never;
+type KeyType<T, K> = T[keyof T & K] 
 
-// multiModel.autoConfigure()
-// treeModel.autoConfigure()
+// const MapToTP = (props: MP & TP):TP => props
 
-// run(
-//   {
-//     FileSystemTree: treeModel.model,
-//     MultiPanel: multiModel.model,
-//   }
-// )
+// const MapToMP = (props: MP & TP):MP => props
 
-const Multi = MultiConcent.Multi
-
-// const setup = (ctx: ICtxBase) => {
-//   ctx.effect(() => {
-//     fetch("https://gitlab.com/api/v4/projects/sv_apitest%2Fp_apitest/repository/tree?ref=6ec5628bbb45e43c5903b3fe54249f296ac24e2c&path=/&per_page=500", {
-//       headers: {
-//         "Private-Token": "sF7us_xdFTBseuKeyvNo"
-//       }
-//     })
-//       .then(res => res.json())
-//       .then(j => {
-//         const data = j.map((i: any) => ({ title: i.name, isDirectory: i.type == "tree", expand: i.type == "tree" }))
-//         ctx.setState({ treeData: data })
-//       })
-//   }, [])
-
-
-// }
-
-const EditPanel = () => (
+const EditPanel = (props:MP & TP & ModulePropsType<ArgumentTypes<typeof Editor>>) => (
   <Layout>
-    <Sider style={{ background: "#fff" }}><FileSystemTree /></Sider>
+    <Sider style={{ background: "#fff" }}><Tree {...(props)}/></Sider>
     <Layout>
-      <Header style={{ background: "#fff", lineHeight: "30px", height: "30px" }}><Multi /></Header>
-      <Content><Editor text={''} /></Content>
+      <Header style={{ background: "#fff", lineHeight: "30px", height: "30px" }}><Multi {...(props)}/></Header>
+      <Content><Editor {...props}/></Content>
       <Footer>Footer</Footer>
     </Layout>
   </Layout>
 );
 
-export default EditPanel;
+
+export default EditPanel

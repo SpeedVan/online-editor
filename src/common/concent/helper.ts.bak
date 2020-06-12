@@ -1,0 +1,121 @@
+/* eslint-disable */
+// import React, {ReactNode, Props} from 'react'
+// import { run, configure, registerHookComp, registerDumb, ICtxBase, register, ICtx, IAnyFnReturnObj, IAnyObj, ICtxDefault, NoMap, IRootBase, MODULE_DEFAULT, MODULE_VOID, RegisterOptions } from 'concent';
+// import model from '../../components/multi/model'
+// import Multi from '../../components/multi'
+// import { isSymbol } from 'util';
+// const { state, reducer } = model
+
+// type ModuleReducerType = {FileMenu: typeof reducer}
+
+// type ModuleStateType = {FileMenu: typeof state}
+
+// type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
+
+// // type BoxedTupleTypes<T extends any[]> =
+// //   { [P in keyof T]: [T[P]] }[Exclude<keyof T, keyof any[]>]
+// // type UnionToIntersection<U> =
+// //   (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
+
+// type ModulePropsType<T> = T extends { 0: infer U } ? U : never;
+// // type ModuleHandlerPropsType<T> = T extends { 1: infer U } ? U : never;
+
+// // const func = (a: (string & number)) => {}
+
+// // type PropsType= ModulePropsType<ArgumentTypes<typeof Multi>>
+// type GuardedType<T extends IAnyObj | NoMap> = T extends { new(...args: any[]): infer U; } ? U : T;
+// const config = <
+//   // ModuleName,
+//   ModuleName extends keyof RootState,
+//   Settings,
+//   ModuleStateType, // {StateType}
+//   ModuleReducerType, // {ReducerType}
+//   PropsType,
+//   RootState extends IRootBase & {[key in ModuleName]:ModuleStateType} = IRootBase &  {[key in ModuleName]:ModuleStateType},
+//   RootReducer extends IRootBase &  {[key in ModuleName]:ModuleReducerType} = IRootBase & {[key in ModuleName]:ModuleReducerType},
+//   RootCu extends { [key in keyof RootState]?: any } = IRootBase,
+//   // Props = PropsType,
+//   // PrivState = ModuleStateType,
+//   ConnectedModules extends keyof RootState = MODULE_VOID,
+  
+//   RefComputed extends IAnyObj = {},
+//   Mapped extends IAnyObj = {},
+//   Extra extends [any, any] | [any] = [any, any],
+
+//   // Ctx=ICtx< RootState, RootReducer, RootCu, PropsType, ModuleStateType, ModuleName, ConnectedModules, RefComputed, Mapped, ExtraType>
+//   // Ctx extends ICtx
+// >(
+//   module:ModuleName,
+//   component:(props: IAnyObj) => ReactNode,
+//   state:ModuleStateType,
+//   reducer:ModuleReducerType,
+//   // :ICtx< RootState, RootReducer, RootCu, PropsType, ModuleStateType, ModuleName, ConnectedModules, RefComputed, Mapped, Extra>
+//   setup: (ctx)=> Settings,
+//   // ICtx< RootState, RootReducer, RootCu, PropsType, ModuleStateType, ModuleName, ConnectedModules, RefComputed, Mapped, Extra>
+//   mapProps: (ctx:ICtxBase) => IAnyObj
+//   ) => {
+//     // <Props, ICtx< RootState, RootReducer, RootCu, Props, PrivState, ModuleName, ConnectedModules, RefComputed, Mapped, ExtraType>, Props, RootState, ModuleName, PrivState >
+//     // const option
+//     // :RegisterOptions<
+//     //   PropsType,
+//     //   RootState,
+//     //   ModuleName,
+//     //   ModuleStateType,
+//     //   ICtx< RootState, RootReducer, RootCu, PropsType, ModuleStateType, ModuleName, ConnectedModules, RefComputed, Mapped, Extra>
+//     // > & { mapProps:(ctx:ICtx< RootState, RootReducer, RootCu, PropsType, ModuleStateType, ModuleName, ConnectedModules, RefComputed, Mapped, Extra>) => PropsType } 
+//     // = { module:module, setup:setup, mapProps:mapProps }
+//     // if (ModuleName instanceof MODULE_DEFAULT)
+    
+//     return registerHookComp<
+//       PropsType,
+//       ICtx< RootState, RootReducer, RootCu, PropsType, ModuleStateType, ModuleName, ConnectedModules, RefComputed, Mapped, Extra>,
+//       IAnyObj,
+//       RootState,
+//       ModuleName,
+//       ModuleStateType
+//     >({ module:module, setup:setup, mapProps:mapProps })(component) 
+//   }
+
+
+// const moduleTypeGuard = (s: string|number|symbol): string|number => {
+//   if (isSymbol(s)) {
+//     return ""
+//   }
+//   else {
+//     return s
+//   }
+// }
+
+// type test_dict = {
+//   a:any,
+//   b:any
+// }
+
+// type which = IAnyObj | NoMap
+
+// type extIAnyObj = IAnyObj & NoMap
+
+// const f = <StateT extends test_dict, Key extends keyof StateT> (key:Key) => {}
+
+// const h = <StateT extends test_dict, Key extends keyof StateT> (key:Key) => {
+//   // f(key) 3/= 2
+//   f<StateT, Key>(key)
+// }
+
+// type Diff<T, U> = T extends U ? never : T;
+
+// const g = <A extends which, RefCtx extends ICtxBase>(a:A extends NoMap ? {}: {mapProps:(refCtx: RefCtx) => A}) => {
+
+// }
+
+// const k = <B extends IAnyObj>(mapProps:(ctx:ICtx) => IAnyObj) => {
+//   g<IAnyObj, ICtx>({mapProps})
+// }
+
+// // const i = (j: (x:IAnyObj) => {}) => {
+
+// // }
+
+// // const j = <K extends IAnyObj> (f: (x:K)=>{}) => {
+// //   i(f)
+// // }

@@ -2,7 +2,7 @@ import React from 'react';
 // import logo from './logo.svg';
 import style from './App.module.css';
 import Home from './routes/home'
-import Editor from './routes/edit-panel'
+import Editor from './routes/edit-panel/concent'
 
 import { BrowserRouter, Switch, Route, Link, HashRouter } from 'react-router-dom';
 import { createHashHistory } from 'history';

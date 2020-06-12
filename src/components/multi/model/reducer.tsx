@@ -2,8 +2,11 @@ import { StateType } from './state'
 
 
 
-export const selectFile = 
-    (newKey: string, { selectKey, ...p }: StateType): StateType => {
-        console.log("selectFile", "old_selectKey", selectKey, "new_selectKey", newKey)
-        return ({ selectKey: newKey, ...p })
+export const changeMenu = 
+    (newKey: string, { currentFile, ...p }: StateType): StateType => ({ currentFile: newKey, ...p })
+
+
+export const addCurrentMenu = 
+    (newKey: string, { currentFile, menuFiles, ...p }: StateType): StateType => {
+        return ({ currentFile: newKey, menuFiles: menuFiles.concat({path:newKey, modified:false}), ...p })
     }
