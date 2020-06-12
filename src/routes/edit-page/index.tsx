@@ -22,7 +22,7 @@ type KeyType<T, K> = T[keyof T & K]
 
 // const MapToMP = (props: MP & TP):MP => props
 
-const EditPanel = (props:MP & TP & ModulePropsType<ArgumentTypes<typeof Editor>>) => (
+const EditPage = (props:MP & TP & ModulePropsType<ArgumentTypes<typeof Editor>>) => (
   <Layout>
     <Sider style={{ background: "#fff" }}><Tree {...(props)}/></Sider>
     <Layout>
@@ -34,4 +34,4 @@ const EditPanel = (props:MP & TP & ModulePropsType<ArgumentTypes<typeof Editor>>
 );
 
 
-export default EditPanel
+export default EditPage

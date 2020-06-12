@@ -1,7 +1,7 @@
 import { StateType } from './state'
 
 export const init = async (cb:Function) => {
-    return await fetch("https://gitlab.com/api/v4/projects/sv_apitest%2Fp_apitest/repository/tree?ref=6ec5628bbb45e43c5903b3fe54249f296ac24e2c&path=/&per_page=500",{
+    return await fetch("https://gitlab.com/api/v4/projects/sv_apitest%2Fp_apitest/repository/tree?ref=774ecfb6ab9b2e2ff66d80dcd39cdfa115cabb40&path=/&per_page=500",{
       headers: {
           "Private-Token": "sF7us_xdFTBseuKeyvNo"
       }

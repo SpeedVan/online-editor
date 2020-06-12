@@ -3,7 +3,7 @@ import EditPanel from './index'
 import { run, configure, registerHookComp, registerDumb, ICtxBase, register, ICtx, IAnyObj, ICtxDefault, IRootBase, MODULE_DEFAULT, MODULE_VOID } from 'concent';
 import model from './model'
 
-import { initEditor } from './../../components/editor/model/init'
+import { initEditor } from '../../components/editor/model/init'
 
 type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
 type ModulePropsType<T> = T extends { 0: infer U } ? U : never;
