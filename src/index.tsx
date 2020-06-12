@@ -23,15 +23,15 @@ Object.defineProperty(window, "fetch", {
   enumerable: true,
   // writable: true,
   get() {
-    return (url, options) => {
+    return (url:any, options:any) => {
       return originFetch(url, {
         ...options, ...{
-          headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            Accept: 'application/json',
-            token: localStorage.getItem('token')
-            //这里统一加token 实现请求拦截
-          }, ...options.headers
+          // headers: {
+          //   // 'Content-Type': 'application/json;charset=UTF-8',
+          //   // Accept: 'application/json',
+          //   // token: localStorage.getItem('token')
+          //   //这里统一加token 实现请求拦截
+          // }, ...options.headers
         }
       })
     }
