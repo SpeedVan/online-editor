@@ -24,7 +24,9 @@ Object.defineProperty(window, "fetch", {
   // writable: true,
   get() {
     return (url:any, options:any) => {
-      return originFetch(url, {
+      const newUrl = "http://localhost/"+new Buffer(url).toString('base64')
+      console.log("origin url", url, "proxy url", newUrl)
+      return originFetch(newUrl, {
         ...options, ...{
           // headers: {
           //   // 'Content-Type': 'application/json;charset=UTF-8',

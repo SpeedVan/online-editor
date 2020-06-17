@@ -25,12 +25,11 @@ class StateComponent extends React.Component<P> {
 }
 
 export const Layout2= <P>(props:{styl:LayoutType, es:Array<React.FC<P>>} & P) => {
-    props.es=[]
     // const {styl, es, ...p} = props
     console.log("Layout2 render")
     if (props.styl == "HLayoutType") {
-        return React.createElement("div", {}, props.es.map(i=>React.createElement("div", {}, React.createElement(i, props))))
+        return React.createElement("div", {}, props.es.map(i=>React.createElement("div", {}, React.createElement(i, {...props, es:[]}))))
     } else {
-        return React.createElement("div", {style:{display:"flex"}}, props.es.map(i=>React.createElement("div", {}, React.createElement(i, props))))
+        return React.createElement("div", {style:{display:"flex"}}, props.es.map(i=>React.createElement("div", {}, React.createElement(i, {...props, es:[]}))))
     }
 }
