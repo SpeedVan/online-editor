@@ -15,7 +15,7 @@
     "@types/react-sortable-tree": "^0.3.11",
     "@types/react-sortable-tree-theme-file-explorer": "0.0.0",
     "@types/uuid": "^8.0.0",
-    "ansi_up": "^4.0.4",
+    "ansi_up": "^5.0.0",
     "antd": "^4.3.4",
     "concent": "^2.7.6",
     "google-protobuf": "^3.12.2",
